@@ -11,7 +11,24 @@ const client = new Discord.Client({
     ]
 })
 
-client.on('ready', (messageOn) => {
+let bot = {
+    client,
+    prefix: "n.",
+    owners: ["735782372737417276"]
+}
+
+client.commands = new Discord.Collection()
+client.events = new Discord.Collection()
+
+client.loadEvents = (bot, reload) => require('./handlers/events')(bot, reload)
+client.loadCommands = (bot, reload) => require('./handlers/commands')(bot, reload)
+
+client.loadEvents(bot, false)
+client.loadCommands(bot, false)
+
+module.exports = bot
+
+/*client.on('ready', (messageOn) => {
     console.log('Successfully Logged In')
 })
 
@@ -29,6 +46,6 @@ client.on("guildMemberAdd", async (member) => {
         content: `<@${member.id}> Welcome to the server!`,
         files: [img]
     })
-})
+})*/
 
 client.login(process.env.TOKEN)
