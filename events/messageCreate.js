@@ -1,11 +1,11 @@
-const Discord = require('discord.js')
+const Discord = require("discord.js")
 
 module.exports = {
-    name: 'messageCreate',
+    name: "messageCreate",
     run: async function runAll(bot, message) {
         const {client, prefix, owners} = bot
 
-        if (message.guild) return
+        if (!message.guild) return
 
         if (message.author.bot) return
 
